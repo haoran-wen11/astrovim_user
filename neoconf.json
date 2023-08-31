@@ -1,0 +1,26 @@
+{
+  "lspconfig": {
+    "pylsp": {
+      "pylsp.plugins.rope_autoimport.enabled": true,
+      "pylsp.plugins.rope_autoimport.memory": true,
+      "pylsp.plugins.rope_completion.enabled": true,
+      "pylsp.plugins.rope_completion.eager": true,
+      "pylsp.plugins.jedi.auto_import_modules": [
+        "numpy",
+        "pandas",
+        "matplotlib"
+      ],
+      "pylsp.plugins.jedi_completion.eager": true,
+      "pylsp.plugins.jedi_completion.fuzzy": true,
+      "pylsp.plugins.jedi_completion.include_class_objects": true,
+      "pylsp.plugins.jedi_completion.include_function_objects": true
+    },
+    "pyright": {
+      "python.pythonPath": "/Users/haoran/miniconda3/envs/py311/bin/python3",
+      "python.analysis.autoSearchPaths": true,
+      "python.analysis.diagnosticMode": "workspace",
+      "python.analysis.useLibraryCodeForTypes": true,
+      "python.analysis.typeCheckingMode": "off"
+    }
+  }
+}
