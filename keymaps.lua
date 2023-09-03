@@ -12,7 +12,7 @@ function M.mappings(maps)
   local is_available = utils.is_available
   local my_utils = require "user.utils.utils"
 
-  -- print(require("astronvim.utils").is_available "vim-dadbod-ui")
+  -- print(require("astronvim.utils").is_available "vim-illuminate")
   -- print(vim.fn.has "unix" == 1)
   local system = vim.loop.os_uname().sysname
 
