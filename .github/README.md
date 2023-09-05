@@ -2,6 +2,8 @@
 
 A user configuration template for [AstroNvim](https://github.com/AstroNvim/AstroNvim)
 
+Configuration from [chaozwn](https://github.com/chaozwn/astronvim_with_coc_or_mason)
+
 ## 🛠️ Installation
 
 #### Make a backup of your current nvim and shared folder
