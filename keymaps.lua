@@ -12,7 +12,7 @@ function M.mappings(maps)
   local is_available = utils.is_available
   local my_utils = require "user.utils.utils"
 
-  -- print(require("astronvim.utils").is_available "vim-illuminate")
+  -- print(require("astronvim.utils").is_available "yanky.nvim")
   -- print(vim.fn.has "unix" == 1)
   local system = vim.loop.os_uname().sysname
 
@@ -91,9 +91,27 @@ function M.mappings(maps)
       maps.c["<D-v>"] = "<C-R>+"
       -- Paste insert mode
       maps.i["<D-v>"] = '<esc>"+pli'
+    end
+  end
 
-      maps.i["jk"] = "<esc>"
-    elseif system == "window" then
+  if system == "Darwin" then
+    --NOTE: neovim > 0.10.0
+    -- maps.n["<D-s>"] = "<Cmd>w<CR>"
+    -- maps.n["<D-v>"] = '"+P'
+    -- maps.v["<D-v>"] = '"+P'
+    -- maps.c["<D-v>"] = "<C-R>+"
+    -- maps.i["<D-v>"] = '<esc>"+pli'
+    if is_available "Comment.nvim" then
+      maps.n["<C-/>"] = {
+        function() require("Comment.api").toggle.linewise.count(vim.v.count > 0 and vim.v.count or 1) end,
+        desc = "Comment line",
+      }
+      maps.v["<C-/>"] = {
+        "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>",
+        desc = "Toggle comment line",
+      }
+      maps.v["<leader>/"] = false
+      maps.n["<leader>/"] = false
     end
   end
 
@@ -118,41 +136,27 @@ function M.mappings(maps)
   -- 关闭搜索高亮
   maps.n["<leader>nh"] = { ":nohlsearch<CR>", desc = "Close search highlight" }
 
-  -- chatgpt
-  -- if is_available "neoai.nvim" then
-  --   maps.n["<leader>n"] = { desc = "󰚩 Chatgpt" }
-  --   maps.v["<leader>n"] = { desc = "󰚩 Chatgpt" }
-  --   -- NOTE: note that the plugin has a feature where the output from the model automatically gets saved to the g register and all code snippets get saved to the c register. These can be changed in the config.
-  --
-  --   maps.n["<leader>no"] = { "<cmd>NeoAI<CR>", desc = "Toggle NeoAI" }
-  --   maps.n["<leader>ne"] = { "<cmd>NeoAIToggle<CR>", desc = "Toggle NeoAI" }
-  --   maps.n["<leader>na"] = { "<cmd>NeoAIContext<CR>", desc = "Choose all code" }
-  --   maps.v["<leader>nf"] = { ":NeoAIContext<CR>", desc = "Select code" }
-  --   maps.n["<leader>ni"] = { ":NeoAIInject ", desc = "Inject code with prompt" }
-  -- end
-  --
-  -- maps.n["<leader><leader>"] = { desc = "󰍉 User" }
-  -- -- maps.n["<leader>m"] = { desc = "󱂬 Translate" }
-  -- maps.n["s"] = "<Nop>"
-  --
-  -- -- close mason
-  -- if is_available "refactoring.nvim" then
-  --   maps.n["<leader>r"] = { desc = " Refactor" }
-  --   maps.v["<leader>r"] = { desc = " Refactor" }
-  -- end
-  --
-  -- maps.n["H"] = { "^", desc = "Go to start without blank" }
-  -- maps.n["L"] = { "$", desc = "Go to end without blank" }
-  --
-  -- -- $跳到行尾不带空格(交换$和g_)
-  -- maps.n["$"] = { "g_", desc = "Go to end without blank" }
-  -- maps.n["g_"] = { "$", desc = "Go to end" }
-  -- maps.v["$"] = { "g_", desc = "Go to end without blank" }
-  -- maps.v["g_"] = { "$", desc = "Go to end" }
-  -- maps.n["0"] = { "^", desc = "Go to start without blank" }
-  -- maps.n["^"] = { "0", desc = "Go to start" }
-  -- maps.v["0"] = { "^", desc = "Go to start without blank" }
-  -- maps.v["^"] = { "0", desc = "Go to start" }
+  maps.n["<leader><leader>"] = { desc = "󰍉 User" }
+  maps.n["s"] = "<Nop>"
+
+  -- close mason
+  if is_available "refactoring.nvim" then
+    maps.n["<leader>r"] = { desc = " Refactor" }
+    maps.v["<leader>r"] = { desc = " Refactor" }
+  end
+
+  maps.n["H"] = { "^", desc = "Go to start without blank" }
+  maps.n["L"] = { "$", desc = "Go to end without blank" }
+
+  -- $跳到行尾不带空格(交换$和g_)
+  maps.n["$"] = { "g_", desc = "Go to end without blank" }
+  maps.n["g_"] = { "$", desc = "Go to end" }
+  maps.v["$"] = { "g_", desc = "Go to end without blank" }
+  maps.v["g_"] = { "$", desc = "Go to end" }
+  maps.n["0"] = { "^", desc = "Go to start without blank" }
+  maps.n["^"] = { "0", desc = "Go to start" }
+  maps.v["0"] = { "^", desc = "Go to start without blank" }
+  maps.v["^"] = { "0", desc = "Go to start" }
 
   -- auto save开关
   if is_available "auto-save.nvim" then maps.n["<leader>um"] = { ":ASToggle<CR>", desc = "Toggle AutoSave" } end
@@ -211,7 +215,7 @@ function M.mappings(maps)
     end
   end
 
-  -- 在normal mode 里粘贴不要复制
+  -- 在visual mode 里粘贴不要复制
   maps.n["x"] = { '"_x', desc = "Cut without copy" }
 
   -- 分屏快捷键
@@ -219,7 +223,6 @@ function M.mappings(maps)
   maps.n["<leader>ww"] = { "<cmd><cr>", desc = "Save" }
   maps.n["<leader>wc"] = { "<C-w>c", desc = "Close current screen" }
   maps.n["<leader>wo"] = { "<C-w>o", desc = "Close other screen" }
-
   -- 多个窗口之间跳转
   maps.n["<leader>w="] = { "<C-w>=", desc = "Make all window equal" }
   maps.n["<TAB>"] =
@@ -248,19 +251,6 @@ function M.mappings(maps)
   maps.n["<leader>lm"] = { ":LspRestart<CR>", desc = "Lsp restart" }
   maps.n["<leader>lg"] = { ":LspLog<CR>", desc = "Show lsp log" }
 
-  -- Comment
-  if is_available "Comment.nvim" then
-    maps.n["<C-/>"] = {
-      function() require("Comment.api").toggle.linewise.count(vim.v.count > 0 and vim.v.count or 1) end,
-      desc = "Comment line",
-    }
-    maps.v["<C-/>"] =
-      { "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>", desc = "Toggle comment line" }
-  end
-  maps.v["<leader>/"] = false
-  maps.n["<leader>/"] = false
-
-  -- Flash
   if is_available "flash.nvim" then
     maps.n["<leader>s"] = {
       function() require("flash").jump() end,
@@ -288,18 +278,18 @@ function M.mappings(maps)
     }
   end
 
-  if is_available "substitute.nvim" then
-    -- substitute, 交换和替换插件, 寄存器中的值，将会替换到s位置, s{motion}
-    maps.n["s"] = { require("substitute").operator, desc = "Replace with {motion}" }
-    maps.n["ss"] = { require("substitute").line, desc = "Replace with line" }
-    maps.n["S"] = { require("substitute").eol, desc = "Replace until eol" }
-    maps.v["p"] = { require("substitute").visual, desc = "Replace in visual" }
-    -- exchange
-    maps.n["sx"] = { require("substitute.exchange").operator, desc = "Exchange with {motion}" }
-    maps.n["sxx"] = { require("substitute.exchange").line, desc = "Exchange with line" }
-    maps.n["sxc"] = { require("substitute.exchange").cancel, desc = "Exchange exchange" }
-    maps.v["X"] = { require("substitute.exchange").visual, desc = "Exchange in visual" }
-  end
+  -- if is_available "substitute.nvim" then
+  --   -- substitute, 交换和替换插件, 寄存器中的值，将会替换到s位置, s{motion}
+  --   maps.n["s"] = { require("substitute").operator, desc = "Replace with {motion}" }
+  --   maps.n["ss"] = { require("substitute").line, desc = "Replace with line" }
+  --   maps.n["S"] = { require("substitute").eol, desc = "Replace until eol" }
+  --   maps.v["p"] = { require("substitute").visual, desc = "Replace in visual" }
+  --   -- exchange
+  --   maps.n["sx"] = { require("substitute.exchange").operator, desc = "Exchange with {motion}" }
+  --   maps.n["sxx"] = { require("substitute.exchange").line, desc = "Exchange with line" }
+  --   maps.n["sxc"] = { require("substitute.exchange").cancel, desc = "Exchange exchange" }
+  --   maps.v["X"] = { require("substitute.exchange").visual, desc = "Exchange in visual" }
+  -- end
 
   -- trouble
   if is_available "trouble.nvim" then
@@ -312,15 +302,10 @@ function M.mappings(maps)
   end
 
   maps.n["<leader>z"] = { desc = " Tools" }
-  -- if is_available "ccc.nvim" then
-  --   maps.n["<leader>zp"] = { "<CMD>CccPick<CR>", desc = "Pick color" }
-  --   maps.n["<leader>zc"] = { "<CMD>CccConvert<CR>", desc = "Convert color" }
-  --   maps.n["<leader>uC"] = { "<CMD>CccHighlighterToggle<CR>", desc = "Toggle ccc highlighter" }
-  -- end
-
-  if is_available "zen-mode.nvim" then
-    -- zen mode
-    maps.n["<leader>zz"] = { "<cmd>ZenMode<cr>", desc = "Zen Mode" }
+  if is_available "ccc.nvim" then
+    maps.n["<leader>zp"] = { "<CMD>CccPick<CR>", desc = "Pick color" }
+    maps.n["<leader>zc"] = { "<CMD>CccConvert<CR>", desc = "Convert color" }
+    maps.n["<leader>uC"] = { "<CMD>CccHighlighterToggle<CR>", desc = "Toggle ccc highlighter" }
   end
 
   if is_available "nvim-treesitter" then

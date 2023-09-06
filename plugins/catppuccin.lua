@@ -4,10 +4,10 @@ return {
   opts = {
     transparent_background = vim.g.transparent_background,
     show_end_of_buffer = true,
-    flavour = "macchiato", -- latte, frappe, macchiato, mocha
+    flavour = "mocha", -- latte, frappe, macchiato, mocha
     background = { -- :h background
       light = "latte",
-      dark = "macchiato",
+      dark = "mocha",
     },
     term_colors = true,
     dim_inactive = {
@@ -71,6 +71,8 @@ return {
       treesitter_context = true,
       treesitter = true,
       nvimtree = false,
+      ts_rainbow = true,
+      ts_rainbow2 = true,
       symbols_outline = true,
       telescope = true,
       lsp_trouble = true,
