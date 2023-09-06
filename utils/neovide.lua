@@ -15,7 +15,7 @@ function M.config()
   -- 是否全屏
   vim.g.neovide_fullscreen = false
   -- 记住以前窗口的大小
-  vim.g.neovide_remember_window_size = false
+  vim.g.neovide_remember_window_size = true
   -- 使用super键位,比如<cmd>
   -- vim.g.neovide_input_use_logo = true
   -- 开启Alt和Meta按键
@@ -27,7 +27,7 @@ function M.config()
   -- 开启轨道动画
   vim.g.neovide_cursor_vfx_mode = "pixiedust"
 
-  vim.g.neovide_cursor_trail_size = 0.8
+  vim.g.neovide_cursor_trail_size = 0.7
 end
 
 function M.background()
