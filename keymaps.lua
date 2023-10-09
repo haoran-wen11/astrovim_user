@@ -248,8 +248,8 @@ function M.mappings(maps)
   }
 
   -- lsp restart
-  maps.n["<leader>lm"] = { ":LspRestart<CR>", desc = "Lsp restart" }
-  maps.n["<leader>lg"] = { ":LspLog<CR>", desc = "Show lsp log" }
+  maps.n["<leader>lm"] = { "<Cmd>LspRestart<CR>", desc = "Lsp restart" }
+  maps.n["<leader>lg"] = { "<Cmd>LspLog<CR>", desc = "Show lsp log" }
 
   if is_available "flash.nvim" then
     maps.n["<leader>s"] = {
@@ -278,19 +278,6 @@ function M.mappings(maps)
     }
   end
 
-  -- if is_available "substitute.nvim" then
-  --   -- substitute, 交换和替换插件, 寄存器中的值，将会替换到s位置, s{motion}
-  --   maps.n["s"] = { require("substitute").operator, desc = "Replace with {motion}" }
-  --   maps.n["ss"] = { require("substitute").line, desc = "Replace with line" }
-  --   maps.n["S"] = { require("substitute").eol, desc = "Replace until eol" }
-  --   maps.v["p"] = { require("substitute").visual, desc = "Replace in visual" }
-  --   -- exchange
-  --   maps.n["sx"] = { require("substitute.exchange").operator, desc = "Exchange with {motion}" }
-  --   maps.n["sxx"] = { require("substitute.exchange").line, desc = "Exchange with line" }
-  --   maps.n["sxc"] = { require("substitute.exchange").cancel, desc = "Exchange exchange" }
-  --   maps.v["X"] = { require("substitute.exchange").visual, desc = "Exchange in visual" }
-  -- end
-
   -- trouble
   if is_available "trouble.nvim" then
     maps.n["<leader>x"] = { desc = " Trouble" }
@@ -312,6 +299,7 @@ function M.mappings(maps)
     -- TsInformation
     maps.n["<leader>lT"] = { "<cmd>TSInstallInfo<cr>", desc = "Tree sitter Information" }
   end
+
 
   if is_available "neoconf.nvim" then
     -- maps.n["<leader>n"] = { desc = " Neoconf" }

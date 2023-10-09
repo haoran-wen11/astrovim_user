@@ -5,6 +5,8 @@ return {
   vim.fn.executable "npm" == 1 and { import = "astrocommunity.pack.json" } or {},
   vim.fn.executable "npm" == 1 and { import = "astrocommunity.pack.yaml" } or {},
   vim.fn.executable "npm" == 1 and { import = "astrocommunity.pack.toml" } or {},
+  vim.fn.executable "protoc" == 1 and { import = "astrocommunity.pack.proto" } or {},
+
   { import = "astrocommunity.pack.rust" },
   { import = "astrocommunity.pack.markdown" },
   { import = "astrocommunity.pack.lua" },
