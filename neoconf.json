@@ -21,6 +21,7 @@
       "python.analysis.diagnosticMode": "workspace",
       "python.analysis.useLibraryCodeForTypes": true,
       "python.analysis.typeCheckingMode": "off"
-    }
+    },
+    "rust-analyzer": {}
   }
 }

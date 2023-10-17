@@ -22,10 +22,7 @@ function M.mappings(maps)
 
   maps.v["K"] = { ":move '<-2<CR>gv-gv", desc = "Move line up", silent = true }
   maps.v["J"] = { ":move '>+1<CR>gv-gv", desc = "Move line down", silent = true }
-  -- escape insert mode
   maps.i["jk"] = "<esc>"
-
-  if is_available "vim-dadbod-ui" then maps.n["<leader>td"] = { "<Cmd>DBUI<CR>", desc = "ToggleTerm db ui" } end
 
   if is_available "diffview.nvim" then
     maps.n["<leader>gD"] = { "<Cmd>DiffviewOpen<CR>", desc = "View diff with tab" }
@@ -60,21 +57,21 @@ function M.mappings(maps)
     end
   end
 
-  -- if is_available "neotest" then
-  --   local neotest = require "neotest"
-  --   maps.n["<leader>m"] = { desc = "󰇉 Test" }
-  --   maps.n["<leader>mc"] = { function() neotest.run.run() end, desc = "Run nearest" }
-  --   maps.n["<leader>mC"] = { function() neotest.run.run { strategy = "dap" } end, desc = "Run nearest with dap" }
-  --   maps.n["<leader>mt"] = { function() neotest.run.run(vim.fn.expand "%") end, desc = "Run file" }
-  --   maps.n["<leader>mT"] =
-  --     { function() neotest.run.run { vim.fn.expand "%", strategy = "dap" } end, desc = "Run file with dap" }
-  --   maps.n["<leader>ma"] = { function() neotest.run.run(vim.loop.cwd()) end, desc = "Run all test files" }
-  --   maps.n["<leader>ms"] = { function() neotest.summary.toggle() end, desc = "Toggle summary" }
-  --   maps.n["<leader>mo"] =
-  --     { function() neotest.output.open { enter = true, auto_close = true } end, desc = "Show output" }
-  --   maps.n["<leader>mO"] = { function() neotest.output_panel.toggle() end, desc = "Toggle output panel" }
-  --   maps.n["<leader>mS"] = { function() neotest.run.stop() end, desc = "Stop test" }
-  -- end
+  if is_available "neotest" then
+    local neotest = require "neotest"
+    maps.n["<leader>m"] = { desc = "󰇉 Test" }
+    maps.n["<leader>mc"] = { function() neotest.run.run() end, desc = "Run nearest" }
+    maps.n["<leader>mC"] = { function() neotest.run.run { strategy = "dap" } end, desc = "Run nearest with dap" }
+    maps.n["<leader>mt"] = { function() neotest.run.run(vim.fn.expand "%") end, desc = "Run file" }
+    maps.n["<leader>mT"] =
+      { function() neotest.run.run { vim.fn.expand "%", strategy = "dap" } end, desc = "Run file with dap" }
+    maps.n["<leader>ma"] = { function() neotest.run.run(vim.loop.cwd()) end, desc = "Run all test files" }
+    maps.n["<leader>ms"] = { function() neotest.summary.toggle() end, desc = "Toggle summary" }
+    maps.n["<leader>mo"] =
+      { function() neotest.output.open { enter = true, auto_close = true } end, desc = "Show output" }
+    maps.n["<leader>mO"] = { function() neotest.output_panel.toggle() end, desc = "Toggle output panel" }
+    maps.n["<leader>mS"] = { function() neotest.run.stop() end, desc = "Stop test" }
+  end
 
   if vim.g.neovide then
     if system == "Darwin" then
@@ -278,6 +275,19 @@ function M.mappings(maps)
     }
   end
 
+  if is_available "substitute.nvim" then
+    -- substitute, 交换和替换插件, 寄存器中的值，将会替换到s位置, s{motion}
+    maps.n["s"] = { require("substitute").operator, desc = "Replace with {motion}" }
+    maps.n["ss"] = { require("substitute").line, desc = "Replace with line" }
+    maps.n["S"] = { require("substitute").eol, desc = "Replace until eol" }
+    maps.v["p"] = { require("substitute").visual, desc = "Replace in visual" }
+    -- exchange
+    maps.n["sx"] = { require("substitute.exchange").operator, desc = "Exchange with {motion}" }
+    maps.n["sxx"] = { require("substitute.exchange").line, desc = "Exchange with line" }
+    maps.n["sxc"] = { require("substitute.exchange").cancel, desc = "Exchange exchange" }
+    maps.v["X"] = { require("substitute.exchange").visual, desc = "Exchange in visual" }
+  end
+
   -- trouble
   if is_available "trouble.nvim" then
     maps.n["<leader>x"] = { desc = " Trouble" }
@@ -299,7 +309,6 @@ function M.mappings(maps)
     -- TsInformation
     maps.n["<leader>lT"] = { "<cmd>TSInstallInfo<cr>", desc = "Tree sitter Information" }
   end
-
 
   if is_available "neoconf.nvim" then
     -- maps.n["<leader>n"] = { desc = " Neoconf" }
