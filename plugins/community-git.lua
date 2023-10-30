@@ -1,3 +1,3 @@
 return {
-  { import = "astrocommunity.git.diffview-nvim" },
+  -- { import = "astrocommunity.git.diffview-nvim" },
 }

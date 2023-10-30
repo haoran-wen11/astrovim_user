@@ -22,6 +22,9 @@
       "python.analysis.useLibraryCodeForTypes": true,
       "python.analysis.typeCheckingMode": "off"
     },
-    "rust-analyzer": {}
+    "rust-analyzer": {
+      "rust-analyzer.cachePriming.enable": true,
+      "rust-analyzer.cachePriming.numThreads": 0
+    }
   }
 }
