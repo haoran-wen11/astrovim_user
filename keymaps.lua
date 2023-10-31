@@ -205,7 +205,7 @@ function M.mappings(maps)
       }
     end
     if vim.fn.executable "joshuto" == 1 then
-      maps.n["<leader>tj"] = {
+      maps.n["<leader>j"] = {
         my_utils.toggle_joshuto(),
         desc = "ToggleTerm joshuto",
       }
@@ -318,7 +318,7 @@ function M.mappings(maps)
   end
 
   if is_available "oil.nvim" then
-    maps.n["<leader>e"] = { "<CMD>Oil<CR>", desc = "Open parent directory" }
+    maps.n["<leader>e"] = { "<CMD>Oil<CR>", desc = "Open file explorer" }
   end
 
   return maps
