@@ -317,6 +317,10 @@ function M.mappings(maps)
     maps.n["<leader>pc"] = { "<cmd>Neoconf lsp<CR>", desc = "Show neoconf merge lsp config" }
   end
 
+  if is_available "oil.nvim" then
+    maps.n["<leader>e"] = { "<CMD>Oil<CR>", desc = "Open parent directory" }
+  end
+
   return maps
 end
 

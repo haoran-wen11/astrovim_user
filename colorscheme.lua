@@ -1,3 +1,3 @@
 -- Set colorscheme to use
--- return "catppuccin"
-return "astrodark"
+return "catppuccin"
+-- return "astrodark"
