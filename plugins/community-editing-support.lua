@@ -1,7 +1,5 @@
 return {
   { import = "astrocommunity.editing-support.todo-comments-nvim" },
-  { import = "astrocommunity.editing-support.auto-save-nvim" },
-  { import = "astrocommunity.editing-support.refactoring-nvim" },
   {
     "chaozwn/auto-save.nvim",
     event = { "User AstroFile", "InsertEnter" },
@@ -34,4 +32,5 @@ return {
       },
     },
   },
+  { import = "astrocommunity.editing-support.refactoring-nvim" },
 }

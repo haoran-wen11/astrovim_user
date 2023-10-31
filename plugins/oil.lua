@@ -71,7 +71,6 @@ return {
           -- see :help oil-columns to see which columns are sortable
           { "type", "asc" },
           { "name", "asc" },
-          { "birthday", "asc" },
         },
       },
     }
