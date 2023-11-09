@@ -91,7 +91,7 @@ return {
           hl = { fg = "bg" },
           -- use the right separator and define the background color
           -- as well as the color to the left of the separator
-          surround = { separator = "none", color = { main = "nav_icon_bg", left = "file_info_bg" } },
+          surround = { separator = "right", color = { main = "nav_icon_bg", left = "file_info_bg" } },
         },
         -- add a navigation component and just display the percentage of progress in the file
         status.component.nav {

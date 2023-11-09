@@ -16,7 +16,7 @@
       "pylsp.plugins.jedi_completion.include_function_objects": true
     },
     "pyright": {
-      "python.pythonPath": "/Users/haoran/miniconda3/envs/py311/bin/python3",
+      "python.pythonPath": "python",
       "python.analysis.autoSearchPaths": true,
       "python.analysis.diagnosticMode": "workspace",
       "python.analysis.useLibraryCodeForTypes": true,
