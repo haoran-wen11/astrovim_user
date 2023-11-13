@@ -24,10 +24,6 @@ function M.mappings(maps)
   maps.v["J"] = { ":move '>+1<CR>gv-gv", desc = "Move line down", silent = true }
   maps.i["jk"] = "<esc>"
 
-  if is_available "diffview.nvim" then
-    maps.n["<leader>gD"] = { "<Cmd>DiffviewOpen<CR>", desc = "View diff with tab" }
-  end
-
   if is_available "nvim-dap-ui" then
     maps.n["<leader>dU"] = {
       function() require("dapui").toggle { reset = true } end,
@@ -219,8 +215,6 @@ function M.mappings(maps)
   -- telescope plugin mappings
   if is_available "telescope.nvim" then
     maps.v["<leader>f"] = { desc = "󰍉 Find" }
-    maps.n["<leader>fp"] =
-      { function() require("telescope").extensions.projects.projects {} end, desc = "Find projects" }
     maps.n["<leader>fT"] = { "<cmd>TodoTelescope<cr>", desc = "Find TODOs" }
     maps.n["<leader>fN"] = { "<cmd>Telescope noice<cr>", desc = "Find noice" }
     maps.v["<leader>fr"] =
@@ -332,16 +326,6 @@ function M.mappings(maps)
     maps.n["sxx"] = { require("substitute.exchange").line, desc = "Exchange with line" }
     maps.n["sxc"] = { require("substitute.exchange").cancel, desc = "Exchange exchange" }
     maps.v["X"] = { require("substitute.exchange").visual, desc = "Exchange in visual" }
-  end
-
-  -- trouble
-  if is_available "trouble.nvim" then
-    maps.n["<leader>x"] = { desc = " Trouble" }
-    maps.n["<leader>xx"] = { "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics (Trouble)" }
-    maps.n["<leader>xX"] = { "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" }
-    maps.n["<leader>xl"] = { "<cmd>TroubleToggle loclist<cr>", desc = "Location List (Trouble)" }
-    maps.n["<leader>xq"] = { "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix List (Trouble)" }
-    maps.n["<leader>xT"] = { "<cmd>TodoTrouble<cr>", desc = "TODOs (Trouble)" }
   end
 
   maps.n["<leader>z"] = { desc = " Tools" }
